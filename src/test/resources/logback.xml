@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <property name="encoding" value="UTF-8"/>
+    <property name="std-pattern" value="[%d{MM-dd HH:mm:ss.SSS} [%t] %p %logger{46}.%M:%L]-%m%n"/>
+
+    <!-- 将日志输入到控制台 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${std-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
