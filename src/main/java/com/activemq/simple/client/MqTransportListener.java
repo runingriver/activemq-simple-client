@@ -10,12 +10,12 @@ import java.io.IOException;
  * 连接的监听器,可以根据业务情况,监听到异常后进行相应处理
  * Consumer不要设置该Listener,每条消息会有一个onCommand回调!
  */
-public class MQTransportListener implements TransportListener {
+public class MqTransportListener implements TransportListener {
     private static final Logger logger = MqConstant.LOG;
     private String listenerName;
     public static volatile boolean isConnected = true;
 
-    public MQTransportListener(String listenerName) {
+    public MqTransportListener(String listenerName) {
         this.listenerName = listenerName;
     }
 

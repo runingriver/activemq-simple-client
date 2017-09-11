@@ -181,7 +181,7 @@ public class Consumer {
         return builder.setPrefetchSize(size).build();
     }
 
-    public static class ConsumerBuilder extends MQBuilder {
+    public static class ConsumerBuilder extends MqBuilder {
         private QueueConnection queueConnection;
         private QueueSession queueSession;
         private MessageConsumer consumer;
@@ -207,7 +207,7 @@ public class Consumer {
                 queueConnection.start();
 
                 //设置连接出现异常监听,根据需要看是否需要重建连接.
-                queueConnection.setExceptionListener(new MQExceptionListener("consumer queueConnection"));
+                queueConnection.setExceptionListener(new MqExceptionListener("consumer queueConnection"));
                 queueSession = queueConnection.createQueueSession(transacted, acknowledge);
                 Queue queue = queueSession.createQueue(destination);
                 consumer = queueSession.createConsumer(queue);

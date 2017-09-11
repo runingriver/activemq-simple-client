@@ -102,13 +102,13 @@ public class Publisher {
         if (url == null || url.isEmpty()) {
             return new PublisherBuilder().setDestinationName(queueName)
                     .setAuthentication(username, password)
-                    .setTransportListener(new MQTransportListener(queueName))
+                    .setTransportListener(new MqTransportListener(queueName))
                     .build();
         }
         return new PublisherBuilder().setDestinationName(queueName)
                 .setAuthentication(username, password)
                 .setServerUrl(url)
-                .setTransportListener(new MQTransportListener(queueName))
+                .setTransportListener(new MqTransportListener(queueName))
                 .build();
     }
 
@@ -123,7 +123,7 @@ public class Publisher {
         logger.info("create default publisher queue:{}", queueName);
         return new PublisherBuilder()
                 .setDestinationName(queueName)
-                .setTransportListener(new MQTransportListener(queueName))
+                .setTransportListener(new MqTransportListener(queueName))
                 .build();
     }
 
@@ -140,7 +140,7 @@ public class Publisher {
         PublisherBuilder builder = new PublisherBuilder();
         builder.setDestinationName(queueName)
                 .setServerUrl(url)
-                .setTransportListener(new MQTransportListener(queueName));
+                .setTransportListener(new MqTransportListener(queueName));
         return builder.build();
     }
 
@@ -160,7 +160,7 @@ public class Publisher {
         return topicSession;
     }
 
-    public static final class PublisherBuilder extends MQBuilder {
+    public static final class PublisherBuilder extends MqBuilder {
         private int producerWindowSize = 0;
         private TopicConnection topicConnection;
         private TopicSession topicSession;

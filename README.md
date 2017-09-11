@@ -14,7 +14,7 @@ Tip:支持上面两点依据,可以从test中获得,也可以模拟环境测试!
 `MqHelper.asyncSendMessage(MqHelper.TEST, "test.mq.queue", content);`
 5. 消费者(consumer):消费消息较少的队列的消息或消息处理时间较长的消息:
 ```
-SmsMqHelper.getSimpleMessage(MqHelper.TEST, "test.mq.queue", new MessageProcessor() {
+MqHelper.getSimpleMessage(MqHelper.TEST, "test.mq.queue", new MessageProcessor() {
             @Override
             public void processMessage(Message message) {
                 String text = getStringFromTextMessage(message);
@@ -24,7 +24,7 @@ SmsMqHelper.getSimpleMessage(MqHelper.TEST, "test.mq.queue", new MessageProcesso
 ```
 6. 消费者(consumer):多线程消费消息量较大或消息处理耗时的消息:
 ```
-SmsMqHelper.getMessage(MqHelper.TEST, "test.mq.queue", new MessageProcessor(10,100) {
+MqHelper.getMessage(MqHelper.TEST, "test.mq.queue", new MessageProcessor(10,100) {
             @Override
             public void processMessage(Message message) {
                  String text = getStringFromTextMessage(message);

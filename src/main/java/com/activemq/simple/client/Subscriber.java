@@ -161,7 +161,7 @@ public class Subscriber {
         return subscriber;
     }
 
-    public static final class SubscriberBuilder extends MQBuilder {
+    public static final class SubscriberBuilder extends MqBuilder {
         private TopicConnection topicConnection;
         private TopicSession topicSession;
         private TopicSubscriber subscriber;
@@ -181,11 +181,11 @@ public class Subscriber {
 
             try {
                 topicConnection = connectionFactory.createTopicConnection();
-                connectionFactory.setExceptionListener(new MQExceptionListener("subscriber connectionFactory"));
+                connectionFactory.setExceptionListener(new MqExceptionListener("subscriber connectionFactory"));
                 topicConnection.start();
 
                 //设置连接出现异常监听,根据需要看是否需要重建连接.
-                topicConnection.setExceptionListener(new MQExceptionListener("subscriber topicConnection"));
+                topicConnection.setExceptionListener(new MqExceptionListener("subscriber topicConnection"));
                 topicSession = topicConnection.createTopicSession(transacted, acknowledge);
                 Topic topic = topicSession.createTopic(destination);
 

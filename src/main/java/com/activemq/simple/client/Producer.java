@@ -71,7 +71,7 @@ public class Producer {
             return;
         }
 
-        boolean isConnected = MQTransportListener.isConnected;
+        boolean isConnected = MqTransportListener.isConnected;
         if (isConnected) {
             //连接良好,sleep,重发,此不会拖慢整个系统
             int times = 0;
@@ -288,13 +288,13 @@ public class Producer {
         if (url == null || url.isEmpty()) {
             return new ProducerBuilder().setDestinationName(queueName)
                     .setAuthentication(username, password)
-                    .setTransportListener(new MQTransportListener("producer " + queueName))
+                    .setTransportListener(new MqTransportListener("producer " + queueName))
                     .build();
         }
         return new ProducerBuilder().setDestinationName(queueName)
                 .setAuthentication(username, password)
                 .setServerUrl(url)
-                .setTransportListener(new MQTransportListener("producer " + queueName))
+                .setTransportListener(new MqTransportListener("producer " + queueName))
                 .build();
     }
 
@@ -308,7 +308,7 @@ public class Producer {
     public static Producer createDefault(String queueName) {
         logger.info("create default producer queue:{}", queueName);
         return new ProducerBuilder().setDestinationName(queueName)
-                .setTransportListener(new MQTransportListener("producer " + queueName))
+                .setTransportListener(new MqTransportListener("producer " + queueName))
                 .build();
     }
 
@@ -325,7 +325,7 @@ public class Producer {
         ProducerBuilder builder = new ProducerBuilder();
         builder.setDestinationName(queueName)
                 .setServerUrl(url)
-                .setTransportListener(new MQTransportListener("producer " + queueName));
+                .setTransportListener(new MqTransportListener("producer " + queueName));
         return builder.build();
     }
 
@@ -345,7 +345,7 @@ public class Producer {
         ProducerBuilder builder = new ProducerBuilder();
         builder.setDestinationName(queueName)
                 .setAuthentication(username, password)
-                .setTransportListener(new MQTransportListener("producer " + queueName));
+                .setTransportListener(new MqTransportListener("producer " + queueName));
         if (url != null && !url.isEmpty()) {
             builder.setServerUrl(url);
         }
@@ -374,7 +374,7 @@ public class Producer {
         ProducerBuilder builder = new ProducerBuilder();
         builder.setDestinationName(queueName)
                 .setDeliveryMode(1)
-                .setTransportListener(new MQTransportListener("producer " + queueName));
+                .setTransportListener(new MqTransportListener("producer " + queueName));
         return builder.setBatchAcknowledge(true)
                 .setAsyncSend(true)
                 .setCopyMessageOnSend(false)
@@ -395,7 +395,7 @@ public class Producer {
         ProducerBuilder builder = new ProducerBuilder();
         builder.setDestinationName(queueName)
                 .setServerUrl(url)
-                .setTransportListener(new MQTransportListener("producer " + queueName));
+                .setTransportListener(new MqTransportListener("producer " + queueName));
         builder.setBatchAcknowledge(true).setAsyncSend(true).setCopyMessageOnSend(false);
         return builder.build();
     }
@@ -416,7 +416,7 @@ public class Producer {
         return queueSession;
     }
 
-    public static final class ProducerBuilder extends MQBuilder {
+    public static final class ProducerBuilder extends MqBuilder {
         private QueueConnection queueConnection;
         private QueueSession queueSession;
         private MessageProducer producer;
@@ -444,7 +444,7 @@ public class Producer {
             try {
                 queueConnection = connectionFactory.createQueueConnection();
                 queueConnection.start();
-                queueConnection.setExceptionListener(new MQExceptionListener("producer queueConnection"));
+                queueConnection.setExceptionListener(new MqExceptionListener("producer queueConnection"));
                 queueSession = queueConnection.createQueueSession(transacted, acknowledge);
                 Queue queue = queueSession.createQueue(destination);
                 producer = queueSession.createProducer(queue);

@@ -9,7 +9,7 @@ import org.slf4j.Logger;
  * builder模式创建Producer,Consumer,Publisher,Subscriber
  * 封装创建client对象中共同的部分.
  */
-public abstract class MQBuilder {
+public abstract class MqBuilder {
     protected static final Logger logger = MqConstant.LOG;
     protected ActiveMQConnectionFactory connectionFactory;
 
@@ -32,7 +32,7 @@ public abstract class MQBuilder {
      * @param url      broker连接字符串
      * @return ConsumerBuilder
      */
-    protected MQBuilder createConnectionFactory(String username, String password, String url) {
+    protected MqBuilder createConnectionFactory(String username, String password, String url) {
         logger.info("createConnectionFactory connectionFactory username:{},password:{},url:{}", username, password, url);
         if (url == null || url.isEmpty()) {
             logger.error("connectionUrl is empty when init object!");
@@ -52,7 +52,7 @@ public abstract class MQBuilder {
      *
      * @return ConsumerBuilder
      */
-    protected MQBuilder createConnectionFactory() {
+    protected MqBuilder createConnectionFactory() {
         this.createConnectionFactory(this.username, this.password, this.connectionUrl);
         return this;
     }
@@ -61,9 +61,9 @@ public abstract class MQBuilder {
      * 设置链接字符串,一般不设置,采用默认即可
      *
      * @param url 连接字符串
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setServerUrl(String url) {
+    public MqBuilder setServerUrl(String url) {
         if (url == null || url.isEmpty()) {
             logger.error("connectionUrl is empty when init object!");
             throw new IllegalArgumentException("connection connectionUrl string is empty.");
@@ -77,9 +77,9 @@ public abstract class MQBuilder {
      *
      * @param username 用户密码
      * @param password 用户密码
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setAuthentication(String username, String password) {
+    public MqBuilder setAuthentication(String username, String password) {
         if (username != null && password != null && !username.isEmpty() && !password.isEmpty()) {
             this.username = username;
             this.password = password;
@@ -94,9 +94,9 @@ public abstract class MQBuilder {
      * 设置队列名字,如: client.queue.test
      *
      * @param destination 队列名
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setDestinationName(String destination) {
+    public MqBuilder setDestinationName(String destination) {
         if (destination == null || destination.isEmpty()) {
             logger.error("destination name is empty when init object!");
             throw new IllegalArgumentException("destination string is empty.");
@@ -109,9 +109,9 @@ public abstract class MQBuilder {
      * 是否支持事务,设置true,则acknowledge直接为SESSION_TRANSACTED(不管你设置Acknowledge与否)
      *
      * @param transacted 是否开启是否
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setTransacted(boolean transacted) {
+    public MqBuilder setTransacted(boolean transacted) {
         this.transacted = transacted;
         return this;
     }
@@ -121,9 +121,9 @@ public abstract class MQBuilder {
      * 1=AUTO_ACKNOWLEDGE,2=CLIENT_ACKNOWLEDGE,3=DUPS_OK_ACKNOWLEDGE,0=SESSION_TRANSACTED
      *
      * @param acknowledge ack
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setAcknowledge(int acknowledge) {
+    public MqBuilder setAcknowledge(int acknowledge) {
         if (acknowledge <= 0 || acknowledge > 3) {
             logger.error("acknowledge must int (0,1,2,3),acknowledge={}", acknowledge);
             throw new IllegalArgumentException("acknowledge must int 0,1,2,3.");
@@ -136,9 +136,9 @@ public abstract class MQBuilder {
      * 消息发送模式: 2=持久化,1=非持久化
      *
      * @param mode 模式
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setDeliveryMode(int mode) {
+    public MqBuilder setDeliveryMode(int mode) {
         if (mode != 1 && mode != 2) {
             logger.error("delivery mode must int (1,2),mode={}", mode);
             throw new IllegalArgumentException("delivery mode must int 1,2.");
@@ -150,9 +150,9 @@ public abstract class MQBuilder {
     /**
      * 为连接添加一个监听器
      * @param listener 监听器
-     * @return MQBuilder
+     * @return MqBuilder
      */
-    public MQBuilder setTransportListener(TransportListener listener) {
+    public MqBuilder setTransportListener(TransportListener listener) {
         this.transportListener = listener;
         return this;
     }

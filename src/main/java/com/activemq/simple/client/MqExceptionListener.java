@@ -9,12 +9,12 @@ import javax.jms.JMSException;
 /**
  * 连接建立过程中出现异常监听器
  */
-public class MQExceptionListener implements ExceptionListener {
+public class MqExceptionListener implements ExceptionListener {
     private static final Logger logger = MqConstant.LOG;
 
     private String name;
 
-    public MQExceptionListener(String name) {
+    public MqExceptionListener(String name) {
         this.name = name;
     }
 
