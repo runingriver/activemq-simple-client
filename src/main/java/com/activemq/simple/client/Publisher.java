@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class Publisher {
     private static final Logger logger = MqConstant.LOG;
-    ActiveMQConnectionFactory connectionFactory;
+
     private TopicConnection topicConnection;
     private TopicSession topicSession;
     private TopicPublisher publisher;
@@ -144,22 +144,6 @@ public class Publisher {
         return builder.build();
     }
 
-    public ActiveMQConnectionFactory getConnectionFactory() {
-        return connectionFactory;
-    }
-
-    public TopicPublisher getPublisher() {
-        return publisher;
-    }
-
-    public TopicConnection getTopicConnection() {
-        return topicConnection;
-    }
-
-    public TopicSession getTopicSession() {
-        return topicSession;
-    }
-
     public static final class PublisherBuilder extends MqBuilder {
         private int producerWindowSize = 0;
         private TopicConnection topicConnection;
@@ -205,7 +189,6 @@ public class Publisher {
             }
 
             Publisher publisher = new Publisher();
-            publisher.connectionFactory = this.connectionFactory;
             publisher.topicConnection = this.topicConnection;
             publisher.topicSession = this.topicSession;
             publisher.publisher = this.publisher;

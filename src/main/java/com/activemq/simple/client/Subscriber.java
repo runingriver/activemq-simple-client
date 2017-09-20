@@ -18,7 +18,6 @@ import javax.jms.TopicSubscriber;
 public class Subscriber {
     private static final Logger logger = MqConstant.LOG;
 
-    ActiveMQConnectionFactory connectionFactory;
     private TopicConnection topicConnection;
     private TopicSession topicSession;
     private TopicSubscriber subscriber;
@@ -145,18 +144,6 @@ public class Subscriber {
         return builder.build();
     }
 
-    public ActiveMQConnectionFactory getConnectionFactory() {
-        return connectionFactory;
-    }
-
-    public TopicConnection getTopicConnection() {
-        return topicConnection;
-    }
-
-    public TopicSession getTopicSession() {
-        return topicSession;
-    }
-
     public TopicSubscriber getSubscriber() {
         return subscriber;
     }
@@ -203,7 +190,6 @@ public class Subscriber {
             }
 
             Subscriber subscriber = new Subscriber();
-            subscriber.connectionFactory = this.connectionFactory;
             subscriber.topicConnection = this.topicConnection;
             subscriber.topicSession = this.topicSession;
             subscriber.subscriber = this.subscriber;
